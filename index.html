@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUTABA'AH - Menjaga Amanah Tugas, Tetap Memperbanyak Ibadah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --primary-green: #064e3b;
+            --gold-light: #fbbf24;
+            --gold-dark: #b45309;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top, #065f46, #064e3b, #022c22);
+            color: #f0fdf4;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.2;
+            z-index: 0;
+            animation: twinkle 15s infinite linear;
+        }
+
+        @keyframes twinkle {
+            0% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.2; }
+        }
+
+        .ramadan-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l3 11 11 3-11 3-3 11-3 11-11-3 11-3 3-11z' fill='%23fbbf24' fill-opacity='0.03'/%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .glass-card {
+            background: rgba(6, 78, 59, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #fde68a, #fbbf24, #d97706, #fde68a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .fade-up {
+            animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-container {
+            position: relative;
+            background: rgba(2, 44, 34, 0.9);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 6px;
+            border-radius: 24px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-item {
+            position: relative;
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fbbf24;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .nav-item i { transition: transform 0.3s ease; }
+        .nav-item span {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .nav-active-bg {
+            position: absolute;
+            height: calc(100% - 12px);
+            top: 6px;
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px rgba(180, 83, 9, 0.5);
+            z-index: 0;
+        }
+
+        .nav-item.active { color: #022c22; opacity: 1; }
+        .nav-item.active i { transform: translateY(-2px); }
+
+        .islamic-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+            position: relative;
+            margin: 1.5rem 0;
+            opacity: 0.5;
+        }
+        .islamic-divider::after {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #064e3b;
+            padding: 0 12px;
+            color: #fbbf24;
+            font-size: 16px;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+        }
+
+        .mosque-silhouette {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to top, #022c22, transparent);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,80 Q30,80 50,50 Q70,20 100,50 Q130,80 150,80 L200,80 Q250,80 270,40 Q300,0 330,40 Q350,80 400,80 L450,80 Q500,80 520,50 Q550,20 580,50 Q600,80 650,80 L700,80 Q750,80 770,40 Q800,0 830,40 Q850,80 900,80 L950,80 Q980,80 1000,70 L1000,100 Z' fill='black'/%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,80 Q30,80 50,50 Q70,20 100,50 Q130,80 150,80 L200,80 Q250,80 270,40 Q300,0 330,40 Q350,80 400,80 L450,80 Q500,80 520,50 Q550,20 580,50 Q600,80 650,80 L700,80 Q750,80 770,40 Q800,0 830,40 Q850,80 900,80 L950,80 Q980,80 1000,70 L1000,100 Z' fill='black'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            -webkit-mask-size: 100% 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .arabic-accent {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 8px rgba(251,191,36,0.4));
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(251, 191, 36, 0.1);
+            border-top: 3px solid #fbbf24;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="stars"></div>
+    <div class="ramadan-pattern"></div>
+    
+    <!-- Silhouette Masjid di latar belakang -->
+    <div class="mosque-silhouette"></div>
+
+    <!-- Modal Sukses -->
+    <div id="success-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-xl hidden">
+        <div class="glass-card w-full max-w-md rounded-[3.5rem] p-10 text-center border-amber-500/40 relative overflow-hidden scale-90 opacity-0 transition-all duration-500" id="modal-container">
+            <div class="relative z-10">
+                <div id="modal-arabic" class="arabic-accent gold-gradient-text">الحمد لله</div>
+                <h3 id="modal-title" class="text-3xl font-black gold-gradient-text mb-6 leading-tight" style="font-family: 'Cinzel', serif;">Ramadhan Penuh Berkah</h3>
+                <div class="bg-black/20 rounded-3xl p-6 mb-8 border border-white/5">
+                    <p id="modal-message" class="text-amber-100/90 text-sm leading-relaxed italic">Pesan akan muncul di sini...</p>
+                </div>
+                <button onclick="closeModal()" class="group relative w-full py-5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 text-emerald-950 font-black tracking-widest active:scale-95 transition-all overflow-hidden shadow-lg shadow-amber-500/20">
+                    <span>AAMIIN, LANJUTKAN</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Nav -->
+    <div class="relative max-w-lg mx-auto px-6 pt-12 pb-24">
+        <header class="flex flex-col items-center mb-6 text-center fade-up">
+            <div class="relative mb-6">
+                <div class="absolute -inset-10 bg-amber-500 rounded-full blur-[60px] opacity-20 animate-pulse"></div>
+                <div class="relative bg-emerald-950/80 p-5 rounded-full border-2 border-amber-500/30 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
+                    <i data-lucide="moon-star" class="w-12 h-12 text-amber-400"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl font-black gold-gradient-text tracking-tighter mb-1" style="font-family: 'Cinzel', serif;">MUTABA'AH</h1>
+            <h2 class="text-amber-200/80 font-bold text-[11px] uppercase tracking-[0.25em] mb-1">Menjaga Amanah Tugas, Tetap Memperbanyak Ibadah</h2>
+            <div class="islamic-divider w-full max-w-[240px]"></div>
+            
+            <p class="text-amber-100/60 text-[11px] leading-relaxed max-w-[280px] italic mt-2">
+                "Meskipun bulan suci Ramadhan membawa suasana yang berbeda, semangat untuk menjaga kinerja dan meningkatkan ibadah tetap menjadi bagian dari komitmen bersama."
+            </p>
+
+            <div class="w-full mt-8">
+                <nav class="nav-container" id="main-nav">
+                    <div id="nav-indicator" class="nav-active-bg" style="width: calc(33.333% - 8px); left: 6px;"></div>
+                    <button onclick="switchTab('tracker', 0)" class="nav-item active"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Harian</span></button>
+                    <button onclick="switchTab('recap', 1)" class="nav-item"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Rekap</span></button>
+                    <button onclick="handleSettingsAccess(2)" class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i><span>Sistem</span></button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- VIEW: TRACKER -->
+        <div id="view-tracker" class="fade-up space-y-8">
+            <div class="glass-card p-6 rounded-[2.5rem] relative overflow-hidden">
+                <div class="space-y-5">
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/50"></i>
+                        <input type="text" id="input-nama" oninput="updateGlobal('nama', this.value)"
+                            class="w-full pl-16 pr-6 py-4 rounded-[1.8rem] bg-black/40 text-white border border-white/5 focus:outline-none focus:border-amber-500/50 text-lg font-bold placeholder:text-emerald-800 uppercase"
+                            placeholder="Nama Lengkap">
+                    </div>
+
+                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-[2rem] border border-amber-500/20 shadow-inner">
+                        <button id="btn-prev-day" onclick="changeDay(-1)" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
+                            <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                        </button>
+                        <div class="text-center flex-1">
+                            <span class="text-[10px] font-black text-amber-300/50 uppercase tracking-widest block mb-0.5">Ramadan Ke</span>
+                            <div class="flex items-center justify-center gap-2">
+                                <span id="display-day" class="text-4xl font-black text-amber-400 leading-none">...</span>
+                            </div>
+                        </div>
+                        <button id="btn-next-day" onclick="changeDay(1)" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
+                            <i data-lucide="chevron-right" class="w-7 h-7"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="amalan-list" class="space-y-5"></div>
+            <div class="pt-4">
+                <button onclick="submitToGoogleSheet()" id="btn-save" 
+                    class="w-full py-6 rounded-[2.5rem] bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-emerald-950 font-black text-xl shadow-lg shadow-amber-500/20 transition-all active:scale-95 flex items-center justify-center gap-4">
+                    <i data-lucide="send" class="w-6 h-6"></i>
+                    <span id="text-save">Simpan Mutaba'ah</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW: RECAPITULATION -->
+        <div id="view-recap" class="hidden fade-up space-y-6">
+            <div class="glass-card p-8 rounded-[2.5rem] text-center border-amber-500/30">
+                <h3 class="text-2xl font-black gold-gradient-text mb-2">Rekapitulasi</h3>
+                <p class="text-amber-400/60 text-xs mb-6 uppercase tracking-widest">Akumulasi Seluruh Pegawai</p>
+                
+                <div id="recap-loader" class="hidden flex flex-col items-center py-12 gap-4">
+                    <div class="loading-spinner"></div>
+                    <p id="recap-loader-text" class="text-xs text-amber-400/60 font-bold uppercase tracking-widest">Sinkronisasi Agregat...</p>
+                </div>
+
+                <div id="recap-content-wrapper">
+                    <div class="grid grid-cols-4 gap-2 mb-8 bg-black/20 p-1 rounded-2xl border border-white/5">
+                        <button onclick="showRecapPart(1)" id="recap-btn-1" class="py-3 rounded-xl bg-amber-500 text-emerald-950 font-bold text-[9px] uppercase transition-all shadow-md">M-1</button>
+                        <button onclick="showRecapPart(2)" id="recap-btn-2" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-2</button>
+                        <button onclick="showRecapPart(3)" id="recap-btn-3" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-3</button>
+                        <button onclick="showRecapPart(4)" id="recap-btn-4" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-4+</button>
+                    </div>
+                    <div id="recap-content" class="space-y-4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: LOGIN & SETTINGS -->
+        <div id="view-login" class="hidden fade-up glass-card p-10 rounded-[3rem] text-center">
+            <div class="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="lock" class="w-10 h-10 text-amber-500"></i></div>
+            <h2 class="text-2xl font-black mb-8 text-white">Akses Khusus</h2>
+            <input type="password" id="input-password" class="w-full p-5 rounded-2xl bg-black/40 border border-white/10 text-center text-3xl mb-8 focus:outline-none focus:border-amber-500 tracking-[0.5em] text-amber-400" placeholder="••••">
+            <div class="flex gap-4">
+                <button onclick="switchTab('tracker', 0)" class="flex-1 py-4 rounded-2xl bg-emerald-950/50 text-amber-600 font-bold">Batal</button>
+                <button onclick="attemptLogin()" class="flex-1 py-4 rounded-2xl bg-amber-500 text-emerald-950 font-black">Masuk</button>
+            </div>
+        </div>
+
+        <div id="view-settings" class="hidden fade-up glass-card p-10 rounded-[3rem] space-y-8">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-amber-500 rounded-2xl text-emerald-950"><i data-lucide="database" class="w-6 h-6"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-white">Kontrol Global</h2>
+                    <p class="text-amber-400/60 text-xs">Sinkronkan hari untuk semua pengguna</p>
+                </div>
+            </div>
+            <div class="bg-black/40 p-6 rounded-2xl border border-amber-500/20 space-y-6">
+                <div class="text-center">
+                    <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest mb-2 block">Set Hari Global</span>
+                    <div class="flex items-center justify-center gap-6 mt-2">
+                        <button onclick="adminChangeActiveDay(-1)" class="w-12 h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="minus"></i></button>
+                        <span id="admin-display-day" class="text-5xl font-black text-amber-400">...</span>
+                        <button onclick="adminChangeActiveDay(1)" class="w-12 h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="plus"></i></button>
+                    </div>
+                </div>
+                <button id="btn-save-day" onclick="saveActiveDay()" class="w-full py-4 rounded-xl bg-amber-500 text-emerald-950 font-black text-sm uppercase tracking-widest shadow-lg hover:bg-amber-400 transition-colors">Update Hari ke Server</button>
+            </div>
+            <button onclick="switchTab('tracker', 0)" class="bg-emerald-900/50 hover:bg-emerald-800 text-amber-300 font-black py-4 rounded-2xl w-full transition-colors border border-amber-500/10">Kembali</button>
+        </div>
+    </div>
+
+    <div id="toast" class="hidden fixed top-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-full bg-amber-500 text-emerald-950 font-black shadow-lg z-[100] border-2 border-white/20 text-sm"></div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_o6RZryQdNIHQ3abxIyVlDVOQflD4DZUevC4XaDIT3SVHE3j16EM2HqWP03IMduVb/exec'; 
+
+        const amalanConfig = [
+            { id: 'shalat', title: 'Sholat Sunnah', question: 'Dhuha & Rawatib', icon: 'sparkles', unit: 'Kali' },
+            { id: 'tilawah', title: 'Tilawah Qur\'an', question: 'Tadarus hari ini', icon: 'book-open', unit: 'Halaman' },
+            { id: 'dzikir', title: 'Dzikir', question: 'Pagi, Petang, & Ba\'da Shalat', icon: 'milestone', unit: 'Kali' },
+            { id: 'ceramah', title: 'Tholabul \'Ilmi', question: 'Kajian/Ceramah', icon: 'scroll', unit: 'Sesi' },
+            { id: 'sedekah', title: 'Infaq & Sedekah', question: 'Berbagi kebaikan', icon: 'heart-handshake', unit: 'Kali' }
+        ];
+
+        let currentDay = 1; 
+        let isAdmin = false;
+        let activeRecapPart = 1;
+        let fetchedDataCloud = [];
+        let userData = JSON.parse(localStorage.getItem('mutabaah_sunnah_data')) || {};
+        let userProfile = JSON.parse(localStorage.getItem('mutabaah_sunnah_profile')) || { nama: '' };
+
+        async function init() {
+            renderAmalanCards();
+            document.getElementById('input-nama').value = userProfile.nama || '';
+            lucide.createIcons();
+            syncCurrentDay().finally(() => {
+                fetchRecapFromCloud(false);
+            });
+        }
+
+        async function syncCurrentDay() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                const res = await fetch(`${SCRIPT_URL}?action=getDay&t=${Date.now()}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                
+                const data = await res.json();
+                if (data && data.day) {
+                    currentDay = parseInt(data.day);
+                }
+            } catch (err) {
+                console.warn("Gagal sinkronisasi hari, menggunakan fallback lokal.");
+            }
+            renderDay();
+        }
+
+        function renderAmalanCards() {
+            const container = document.getElementById('amalan-list');
+            if(!container) return;
+            container.innerHTML = amalanConfig.map((item) => `
+                <div class="p-6 glass-card rounded-[2.5rem] flex flex-col gap-6 border-amber-500/10 group">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="${item.icon}" class="text-amber-400 w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[10px] font-bold text-amber-400/50 uppercase tracking-widest mb-1">${item.question}</p>
+                            <h4 class="font-black text-xl text-white leading-tight">${item.title}</h4>
+                        </div>
+                        <div class="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[9px] font-black text-amber-500 uppercase self-start mt-1">${item.unit}</div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="adjustValue('${item.id}', -1)" class="w-14 h-14 rounded-2xl bg-black/40 flex items-center justify-center text-white active:scale-90 border border-white/5"><i data-lucide="minus"></i></button>
+                        <input type="number" id="val-${item.id}" value="0" onchange="updateDayData('${item.id}', this.value)" class="flex-1 bg-black/50 rounded-[1.5rem] py-4 text-center text-2xl font-black text-amber-400 focus:outline-none border border-amber-500/10">
+                        <button onclick="adjustValue('${item.id}', 1)" class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 active:scale-90 border border-white/5"><i data-lucide="plus"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderDay() {
+            const display = document.getElementById('display-day');
+            if (display) display.textContent = currentDay;
+            
+            const btnPrev = document.getElementById('btn-prev-day');
+            const btnNext = document.getElementById('btn-next-day');
+            
+            if (isAdmin) {
+                if (btnPrev) btnPrev.classList.remove('hidden');
+                if (btnNext) btnNext.classList.remove('hidden');
+            }
+
+            const data = userData[currentDay] || {};
+            amalanConfig.forEach(item => {
+                const input = document.getElementById(`val-${item.id}`);
+                if (input) input.value = data[item.id] || 0;
+            });
+        }
+
+        async function fetchRecapFromCloud(showLoader = true) {
+            const loader = document.getElementById('recap-loader');
+            const loaderText = document.getElementById('recap-loader-text');
+            const wrapper = document.getElementById('recap-content-wrapper');
+
+            if (showLoader) {
+                loader?.classList.remove('hidden');
+                wrapper?.classList.add('hidden');
+            }
+
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getAllData&t=${Date.now()}`);
+                if (!response.ok) throw new Error("Server response not OK");
+                
+                const data = await response.json();
+                if (data && data.records) {
+                    fetchedDataCloud = data.records;
+                }
+            } catch (err) {
+                console.error("Gagal menarik data rekap:", err);
+                if (loaderText) loaderText.textContent = "Koneksi Bermasalah. Mencoba lagi...";
+                setTimeout(() => fetchRecapFromCloud(false), 3000);
+            } finally {
+                showRecapPart(activeRecapPart);
+                if (showLoader) {
+                    loader?.classList.add('hidden');
+                    wrapper?.classList.remove('hidden');
+                }
+            }
+        }
+
+        function showRecapPart(part) {
+            activeRecapPart = part;
+            const startDay = (part - 1) * 7 + 1;
+            let endDay = part * 7; 
+            if (part === 4) endDay = 30;
+            
+            [1,2,3,4].forEach(p => {
+                const btn = document.getElementById(`recap-btn-${p}`);
+                if(btn) {
+                    if (p === part) {
+                        btn.classList.add('bg-amber-500', 'text-emerald-950', 'shadow-md');
+                        btn.classList.remove('text-amber-400');
+                    } else {
+                        btn.classList.remove('bg-amber-500', 'text-emerald-950', 'shadow-md');
+                        btn.classList.add('text-amber-400');
+                    }
+                }
+            });
+
+            const totals = { shalat: 0, tilawah: 0, dzikir: 0, ceramah: 0, sedekah: 0 };
+
+            if (fetchedDataCloud && fetchedDataCloud.length > 0) {
+                fetchedDataCloud.forEach(record => {
+                    const dayStr = String(record.hari || "");
+                    const dayMatch = dayStr.match(/\d+/);
+                    if (dayMatch) {
+                        const dayNum = parseInt(dayMatch[0]);
+                        if (dayNum >= startDay && dayNum <= endDay) {
+                            totals.shalat += parseInt(record.shalat_sunnah || 0);
+                            totals.tilawah += parseInt(record.tilawah || 0);
+                            totals.dzikir += parseInt(record.dzikir || 0);
+                            totals.ceramah += parseInt(record.ceramah_sirah || 0);
+                            totals.sedekah += parseInt(record.sedekah || 0);
+                        }
+                    }
+                });
+            }
+
+            const content = document.getElementById('recap-content');
+            if (content) {
+                if (fetchedDataCloud.length === 0) {
+                    content.innerHTML = `<div class="py-10 text-amber-500/30 text-xs italic">Menghubungkan ke server atau data kosong...</div>`;
+                } else {
+                    content.innerHTML = `<div class="mb-4 text-[10px] text-amber-200/50 font-bold uppercase tracking-[0.2em]">Agregat Hari ${startDay}-${endDay}</div>` + 
+                    amalanConfig.map(item => `
+                        <div class="flex items-center justify-between p-4 bg-black/20 rounded-2xl border border-amber-500/10 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="${item.icon}" class="w-4 h-4 text-amber-400"></i>
+                                <span class="text-sm font-bold text-amber-100/90">${item.title}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-amber-400">${totals[item.id].toLocaleString('id-ID')}</span>
+                                <span class="text-[9px] text-amber-600 uppercase ml-1">${item.unit}</span>
+                            </div>
+                        </div>`).join('');
+                }
+                lucide.createIcons();
+            }
+        }
+
+        function adminChangeActiveDay(delta) {
+            let temp = currentDay + delta;
+            if (temp >= 1 && temp <= 30) {
+                currentDay = temp;
+                const adminDisp = document.getElementById('admin-display-day');
+                if (adminDisp) adminDisp.textContent = currentDay;
+            }
+        }
+
+        async function saveActiveDay() {
+            const btn = document.getElementById('btn-save-day');
+            const originalText = btn.textContent;
+            btn.textContent = "SINKRONISASI...";
+            btn.classList.add('opacity-50', 'pointer-events-none');
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ action: 'setDay', day: currentDay })
+                });
+                showToast("Hari Aktif Diperbarui!");
+                setTimeout(() => window.location.reload(), 1000);
+            } catch (err) {
+                showToast("Update terkirim (Offline mode).");
+            } finally {
+                btn.textContent = originalText;
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+            }
+        }
+
+        function switchTab(tab, index) {
+            document.querySelectorAll('[id^="view-"]').forEach(v => v.classList.add('hidden'));
+            const target = document.getElementById(`view-${tab}`);
+            if (target) target.classList.remove('hidden');
+
+            const indicator = document.getElementById('nav-indicator');
+            const navItems = document.querySelectorAll('.nav-item');
+            const step = 100 / navItems.length;
+            
+            if (indicator) indicator.style.left = `calc(${index * step}% + 6px)`;
+            
+            navItems.forEach((item, idx) => {
+                idx === index ? item.classList.add('active') : item.classList.remove('active');
+            });
+
+            if (tab === 'recap') {
+                fetchRecapFromCloud(true);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeDay(delta) {
+            if (!isAdmin) return;
+            const next = currentDay + delta;
+            if (next >= 1 && next <= 30) { 
+                currentDay = next; 
+                renderDay();
+            }
+        }
+
+        function adjustValue(id, delta) {
+            const input = document.getElementById(`val-${id}`);
+            if (!input) return;
+            let newVal = Math.max(0, parseInt(input.value || 0) + delta);
+            input.value = newVal;
+            updateDayData(id, newVal);
+        }
+
+        function updateGlobal(field, value) {
+            userProfile[field] = value;
+            localStorage.setItem('mutabaah_sunnah_profile', JSON.stringify(userProfile));
+        }
+
+        function updateDayData(field, value) {
+            if (!userData[currentDay]) userData[currentDay] = {};
+            userData[currentDay][field] = parseInt(value) || 0;
+            localStorage.setItem('mutabaah_sunnah_data', JSON.stringify(userData));
+        }
+
+        function handleSettingsAccess(index) { 
+            isAdmin ? switchTab('settings', index) : switchTab('login', index); 
+        }
+
+        function attemptLogin() {
+            if (document.getElementById('input-password').value === 'hikmah 1902') {
+                isAdmin = true; 
+                renderDay();
+                switchTab('settings', 2);
+            } else { 
+                showToast("Sandi Salah!"); 
+            }
+        }
+
+        async function submitToGoogleSheet() {
+            const nama = (userProfile.nama || "").trim();
+            if (!nama) { showToast("⚠️ Tulis nama Anda dulu!"); return; }
+            
+            const text = document.getElementById('text-save');
+            const btn = document.getElementById('btn-save');
+            const originalText = text.textContent;
+            
+            text.textContent = 'Menyimpan...';
+            btn.classList.add('opacity-70', 'pointer-events-none');
+
+            const dayData = userData[currentDay] || {};
+            const payload = {
+                action: 'submit',
+                nama: nama.toUpperCase(), 
+                hari: `Hari ke-${currentDay}`,
+                tilawah: dayData.tilawah || 0, 
+                shalat_sunnah: dayData.shalat || 0,
+                dzikir: dayData.dzikir || 0, 
+                ceramah_sirah: dayData.ceramah || 0, 
+                sedekah: dayData.sedekah || 0
+            };
+
+            try {
+                await fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload) 
+                });
+                showSuccessModal();
+            } catch (err) { 
+                showSuccessModal(); 
+            } finally {
+                text.textContent = originalText;
+                btn.classList.remove('opacity-70', 'pointer-events-none');
+            }
+        }
+
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            const container = document.getElementById('modal-container');
+            
+            let phaseTitle = "", phaseMessage = "", phaseArabic = "الحمد لله";
+            
+            if (currentDay <= 10) {
+                phaseTitle = "10 Hari Pertama - Rahmat"; 
+                phaseArabic = "بِسْمِ اللَّهِ";
+                phaseMessage = "Di 10 hari pertama Ramadhan yang penuh rahmat, mari kita memulai setiap tugas dengan amanah, sambil terus meningkatkan ibadah sebagai bekal keberkahan dalam setiap langkah kerja.";
+            } else if (currentDay <= 20) {
+                phaseTitle = "10 Hari Kedua - Maghfirah"; 
+                phaseArabic = "أَسْتَغْفِرُ اللَّهَ";
+                phaseMessage = "Memasuki 10 hari kedua Ramadhan yang penuh maghfirah, mari kita evaluasi kinerja dengan jujur, memperbaiki setiap kekurangan, and memperbanyak ibadah agar ampunan dan keberkahan senantiasa menyertai kita.";
+            } else {
+                phaseTitle = "10 Hari Terakhir - Hidayah"; 
+                phaseArabic = "يا رب";
+                phaseMessage = "Di 10 hari terakhir Ramadhan, momentum untuk memperkuat fokus kinerja dan mendekatkan diri kepada Allah semakin besar—jadikan setiap tugas sebagai kesempatan meningkatkan kualitas ibadah dan meraih hidayah-Nya.";
+            }
+
+            document.getElementById('modal-title').textContent = phaseTitle; 
+            document.getElementById('modal-message').textContent = phaseMessage; 
+            document.getElementById('modal-arabic').textContent = phaseArabic;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => { 
+                container.classList.remove('scale-90', 'opacity-0'); 
+                container.classList.add('scale-100', 'opacity-100'); 
+            }, 50);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            const container = document.getElementById('modal-container');
+            container.classList.add('scale-90', 'opacity-0'); 
+            container.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => { modal.classList.add('hidden'); }, 500);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if(!t) return;
+            t.textContent = msg; 
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 3000);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
