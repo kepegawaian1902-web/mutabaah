@@ -90,7 +90,7 @@
         .nav-item {
             position: relative;
             flex: 1;
-            padding: 12px 0;
+            padding: 10px 0;
             border-radius: 18px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -102,13 +102,20 @@
             opacity: 0.6;
         }
 
+        @media (min-width: 640px) {
+            .nav-item { padding: 12px 0; }
+        }
+
         .nav-item i { transition: transform 0.3s ease; }
         .nav-item span {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
             letter-spacing: 0.05em;
             margin-top: 4px;
             text-transform: uppercase;
+        }
+        @media (min-width: 640px) {
+            .nav-item span { font-size: 10px; }
         }
 
         .nav-active-bg {
@@ -129,9 +136,13 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, #fbbf24, transparent);
             position: relative;
-            margin: 1.5rem 0;
+            margin: 1.25rem 0;
             opacity: 0.5;
         }
+        @media (min-width: 640px) {
+            .islamic-divider { margin: 1.5rem 0; }
+        }
+        
         .islamic-divider::after {
             content: '✦';
             position: absolute;
@@ -141,8 +152,11 @@
             background: #064e3b;
             padding: 0 12px;
             color: #fbbf24;
-            font-size: 16px;
+            font-size: 14px;
             text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+        }
+        @media (min-width: 640px) {
+            .islamic-divider::after { font-size: 16px; }
         }
 
         .mosque-silhouette {
@@ -162,10 +176,13 @@
 
         .arabic-accent {
             font-family: 'Amiri', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             line-height: 1;
             margin-bottom: 0.5rem;
             filter: drop-shadow(0 0 8px rgba(251,191,36,0.4));
+        }
+        @media (min-width: 640px) {
+            .arabic-accent { font-size: 3.5rem; }
         }
 
         .loading-spinner {
@@ -188,15 +205,15 @@
     <div class="mosque-silhouette"></div>
 
     <!-- Modal Sukses -->
-    <div id="success-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-xl hidden">
-        <div class="glass-card w-full max-w-md rounded-[3.5rem] p-10 text-center border-amber-500/40 relative overflow-hidden scale-90 opacity-0 transition-all duration-500" id="modal-container">
+    <div id="success-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-xl hidden">
+        <div class="glass-card w-full max-w-md rounded-[2.5rem] sm:rounded-[3.5rem] p-6 sm:p-10 text-center border-amber-500/40 relative overflow-hidden scale-90 opacity-0 transition-all duration-500" id="modal-container">
             <div class="relative z-10">
                 <div id="modal-arabic" class="arabic-accent gold-gradient-text">الحمد لله</div>
-                <h3 id="modal-title" class="text-3xl font-black gold-gradient-text mb-6 leading-tight" style="font-family: 'Cinzel', serif;">Ramadhan Penuh Berkah</h3>
-                <div class="bg-black/20 rounded-3xl p-6 mb-8 border border-white/5">
-                    <p id="modal-message" class="text-amber-100/90 text-sm leading-relaxed italic">Pesan akan muncul di sini...</p>
+                <h3 id="modal-title" class="text-2xl sm:text-3xl font-black gold-gradient-text mb-4 sm:mb-6 leading-tight" style="font-family: 'Cinzel', serif;">Ramadhan Penuh Berkah</h3>
+                <div class="bg-black/20 rounded-2xl sm:rounded-3xl p-5 sm:p-6 mb-6 sm:mb-8 border border-white/5">
+                    <p id="modal-message" class="text-amber-100/90 text-xs sm:text-sm leading-relaxed italic">Pesan akan muncul di sini...</p>
                 </div>
-                <button onclick="closeModal()" class="group relative w-full py-5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 text-emerald-950 font-black tracking-widest active:scale-95 transition-all overflow-hidden shadow-lg shadow-amber-500/20">
+                <button onclick="closeModal()" class="group relative w-full py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 text-emerald-950 font-black text-sm sm:text-base tracking-widest active:scale-95 transition-all overflow-hidden shadow-lg shadow-amber-500/20">
                     <span>AAMIIN, LANJUTKAN</span>
                 </button>
             </div>
@@ -204,64 +221,66 @@
     </div>
 
     <!-- Header & Nav -->
-    <div class="relative max-w-lg mx-auto px-6 pt-12 pb-24">
+    <div class="relative max-w-lg mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-24">
         <header class="flex flex-col items-center mb-6 text-center fade-up">
-            <div class="relative mb-6">
-                <div class="absolute -inset-10 bg-amber-500 rounded-full blur-[60px] opacity-20 animate-pulse"></div>
-                <div class="relative bg-emerald-950/80 p-5 rounded-full border-2 border-amber-500/30 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
-                    <i data-lucide="moon-star" class="w-12 h-12 text-amber-400"></i>
+            <div class="relative mb-4 sm:mb-6">
+                <div class="absolute -inset-10 bg-amber-500 rounded-full blur-[40px] sm:blur-[60px] opacity-20 animate-pulse"></div>
+                <div class="relative bg-emerald-950/80 p-4 sm:p-5 rounded-full border-2 border-amber-500/30 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
+                    <i data-lucide="moon-star" class="w-10 h-10 sm:w-12 sm:h-12 text-amber-400"></i>
                 </div>
             </div>
-            <h1 class="text-5xl font-black gold-gradient-text tracking-tighter mb-1" style="font-family: 'Cinzel', serif;">MUTABA'AH</h1>
-            <h2 class="text-amber-200/80 font-bold text-[11px] uppercase tracking-[0.25em] mb-1">Menjaga Amanah Tugas, Tetap Memperbanyak Ibadah</h2>
-            <div class="islamic-divider w-full max-w-[240px]"></div>
+            <h1 class="text-4xl sm:text-5xl font-black gold-gradient-text tracking-tighter mb-1" style="font-family: 'Cinzel', serif;">MUTABA'AH</h1>
+            <h2 class="text-amber-200/80 font-bold text-[9px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] mb-1">Menjaga Amanah Tugas, Tetap Memperbanyak Ibadah</h2>
+            <div class="islamic-divider w-full max-w-[200px] sm:max-w-[240px]"></div>
             
-            <p class="text-amber-100/60 text-[11px] leading-relaxed max-w-[280px] italic mt-2">
+            <p class="text-amber-100/60 text-[10px] sm:text-[11px] leading-relaxed max-w-[260px] sm:max-w-[280px] italic mt-2">
                 "Meskipun bulan suci Ramadhan membawa suasana yang berbeda, semangat untuk menjaga kinerja dan meningkatkan ibadah tetap menjadi bagian dari komitmen bersama."
             </p>
 
-            <div class="w-full mt-8">
+            <div class="w-full mt-6 sm:mt-8">
                 <nav class="nav-container" id="main-nav">
                     <div id="nav-indicator" class="nav-active-bg" style="width: calc(33.333% - 8px); left: 6px;"></div>
-                    <button onclick="switchTab('tracker', 0)" class="nav-item active"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Harian</span></button>
-                    <button onclick="switchTab('recap', 1)" class="nav-item"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Rekap</span></button>
-                    <button onclick="handleSettingsAccess(2)" class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i><span>Sistem</span></button>
+                    <button onclick="switchTab('tracker', 0)" class="nav-item active"><i data-lucide="layout-grid" class="w-4 h-4 sm:w-5 sm:h-5"></i><span>Harian</span></button>
+                    <button onclick="switchTab('recap', 1)" class="nav-item"><i data-lucide="bar-chart-3" class="w-4 h-4 sm:w-5 sm:h-5"></i><span>Rekap</span></button>
+                    <button onclick="handleSettingsAccess(2)" class="nav-item"><i data-lucide="settings" class="w-4 h-4 sm:w-5 sm:h-5"></i><span>Sistem</span></button>
                 </nav>
             </div>
         </header>
 
         <!-- VIEW: TRACKER -->
-        <div id="view-tracker" class="fade-up space-y-8">
-            <div class="glass-card p-6 rounded-[2.5rem] relative overflow-hidden">
-                <div class="space-y-5">
+        <div id="view-tracker" class="fade-up space-y-6 sm:space-y-8">
+            <div class="glass-card p-4 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] relative overflow-hidden">
+                <div class="space-y-4 sm:space-y-5">
                     <div class="relative">
-                        <i data-lucide="user" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/50"></i>
+                        <i data-lucide="user" class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/50"></i>
                         <input type="text" id="input-nama" oninput="updateGlobal('nama', this.value)"
-                            class="w-full pl-16 pr-6 py-4 rounded-[1.8rem] bg-black/40 text-white border border-white/5 focus:outline-none focus:border-amber-500/50 text-lg font-bold placeholder:text-emerald-800 uppercase"
+                            class="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-3 sm:py-4 rounded-[1.5rem] sm:rounded-[1.8rem] bg-black/40 text-white border border-white/5 focus:outline-none focus:border-amber-500/50 text-base sm:text-lg font-bold placeholder:text-emerald-800 uppercase"
                             placeholder="Nama Lengkap">
                     </div>
 
-                    <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-[2rem] border border-amber-500/20 shadow-inner">
-                        <button id="btn-prev-day" onclick="changeDay(-1)" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
-                            <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                    <div class="flex items-center justify-between bg-black/30 p-2 sm:p-2.5 rounded-[1.5rem] sm:rounded-[2rem] border border-amber-500/20 shadow-inner">
+                        <button id="btn-prev-day" onclick="changeDay(-1)" class="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl sm:rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
+                            <i data-lucide="chevron-left" class="w-5 h-5 sm:w-7 sm:h-7"></i>
                         </button>
-                        <div class="text-center flex-1">
-                            <span class="text-[10px] font-black text-amber-300/50 uppercase tracking-widest block mb-0.5">Ramadan Ke</span>
+                        <div class="text-center flex-1 min-w-0">
+                            <span class="text-[9px] sm:text-[10px] font-black text-amber-300/50 uppercase tracking-widest block mb-0.5">Ramadan Ke</span>
                             <div class="flex items-center justify-center gap-2">
-                                <span id="display-day" class="text-4xl font-black text-amber-400 leading-none">...</span>
+                                <span id="display-day" class="text-3xl sm:text-4xl font-black text-amber-400 leading-none">...</span>
                             </div>
                         </div>
-                        <button id="btn-next-day" onclick="changeDay(1)" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
-                            <i data-lucide="chevron-right" class="w-7 h-7"></i>
+                        <button id="btn-next-day" onclick="changeDay(1)" class="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl sm:rounded-2xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors hidden">
+                            <i data-lucide="chevron-right" class="w-5 h-5 sm:w-7 sm:h-7"></i>
                         </button>
                     </div>
                 </div>
             </div>
-            <div id="amalan-list" class="space-y-5"></div>
-            <div class="pt-4">
+            
+            <div id="amalan-list" class="space-y-4 sm:space-y-5"></div>
+            
+            <div class="pt-2 sm:pt-4">
                 <button onclick="submitToGoogleSheet()" id="btn-save" 
-                    class="w-full py-6 rounded-[2.5rem] bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-emerald-950 font-black text-xl shadow-lg shadow-amber-500/20 transition-all active:scale-95 flex items-center justify-center gap-4">
-                    <i data-lucide="send" class="w-6 h-6"></i>
+                    class="w-full py-4 sm:py-6 rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-emerald-950 font-black text-lg sm:text-xl shadow-lg shadow-amber-500/20 transition-all active:scale-95 flex items-center justify-center gap-3 sm:gap-4">
+                    <i data-lucide="send" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                     <span id="text-save">Simpan Mutaba'ah</span>
                 </button>
             </div>
@@ -269,62 +288,62 @@
 
         <!-- VIEW: RECAPITULATION -->
         <div id="view-recap" class="hidden fade-up space-y-6">
-            <div class="glass-card p-8 rounded-[2.5rem] text-center border-amber-500/30">
-                <h3 class="text-2xl font-black gold-gradient-text mb-2">Rekapitulasi</h3>
-                <p class="text-amber-400/60 text-xs mb-6 uppercase tracking-widest">Akumulasi Seluruh Pegawai</p>
+            <div class="glass-card p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] text-center border-amber-500/30">
+                <h3 class="text-xl sm:text-2xl font-black gold-gradient-text mb-1 sm:mb-2">Rekapitulasi</h3>
+                <p class="text-amber-400/60 text-[10px] sm:text-xs mb-5 sm:mb-6 uppercase tracking-widest">Akumulasi Seluruh Pegawai</p>
                 
-                <div id="recap-loader" class="hidden flex flex-col items-center py-12 gap-4">
+                <div id="recap-loader" class="hidden flex flex-col items-center py-10 sm:py-12 gap-4">
                     <div class="loading-spinner"></div>
-                    <p id="recap-loader-text" class="text-xs text-amber-400/60 font-bold uppercase tracking-widest">Sinkronisasi Agregat...</p>
+                    <p id="recap-loader-text" class="text-[10px] sm:text-xs text-amber-400/60 font-bold uppercase tracking-widest">Sinkronisasi Agregat...</p>
                 </div>
 
                 <div id="recap-content-wrapper">
-                    <div class="grid grid-cols-4 gap-2 mb-8 bg-black/20 p-1 rounded-2xl border border-white/5">
-                        <button onclick="showRecapPart(1)" id="recap-btn-1" class="py-3 rounded-xl bg-amber-500 text-emerald-950 font-bold text-[9px] uppercase transition-all shadow-md">M-1</button>
-                        <button onclick="showRecapPart(2)" id="recap-btn-2" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-2</button>
-                        <button onclick="showRecapPart(3)" id="recap-btn-3" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-3</button>
-                        <button onclick="showRecapPart(4)" id="recap-btn-4" class="py-3 rounded-xl text-amber-400 font-bold text-[9px] uppercase transition-all">M-4+</button>
+                    <div class="grid grid-cols-4 gap-1 sm:gap-2 mb-6 sm:mb-8 bg-black/20 p-1 rounded-[1rem] sm:rounded-2xl border border-white/5">
+                        <button onclick="showRecapPart(1)" id="recap-btn-1" class="py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-amber-500 text-emerald-950 font-bold text-[8px] sm:text-[9px] uppercase transition-all shadow-md">M-1</button>
+                        <button onclick="showRecapPart(2)" id="recap-btn-2" class="py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-amber-400 font-bold text-[8px] sm:text-[9px] uppercase transition-all">M-2</button>
+                        <button onclick="showRecapPart(3)" id="recap-btn-3" class="py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-amber-400 font-bold text-[8px] sm:text-[9px] uppercase transition-all">M-3</button>
+                        <button onclick="showRecapPart(4)" id="recap-btn-4" class="py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-amber-400 font-bold text-[8px] sm:text-[9px] uppercase transition-all">M-4+</button>
                     </div>
-                    <div id="recap-content" class="space-y-4"></div>
+                    <div id="recap-content" class="space-y-3 sm:space-y-4"></div>
                 </div>
             </div>
         </div>
 
         <!-- VIEW: LOGIN & SETTINGS -->
-        <div id="view-login" class="hidden fade-up glass-card p-10 rounded-[3rem] text-center">
-            <div class="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="lock" class="w-10 h-10 text-amber-500"></i></div>
-            <h2 class="text-2xl font-black mb-8 text-white">Akses Khusus</h2>
-            <input type="password" id="input-password" class="w-full p-5 rounded-2xl bg-black/40 border border-white/10 text-center text-3xl mb-8 focus:outline-none focus:border-amber-500 tracking-[0.5em] text-amber-400" placeholder="••••">
-            <div class="flex gap-4">
-                <button onclick="switchTab('tracker', 0)" class="flex-1 py-4 rounded-2xl bg-emerald-950/50 text-amber-600 font-bold">Batal</button>
-                <button onclick="attemptLogin()" class="flex-1 py-4 rounded-2xl bg-amber-500 text-emerald-950 font-black">Masuk</button>
+        <div id="view-login" class="hidden fade-up glass-card p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3rem] text-center">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6"><i data-lucide="lock" class="w-8 h-8 sm:w-10 sm:h-10 text-amber-500"></i></div>
+            <h2 class="text-xl sm:text-2xl font-black mb-6 sm:mb-8 text-white">Akses Khusus</h2>
+            <input type="password" id="input-password" class="w-full p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-black/40 border border-white/10 text-center text-2xl sm:text-3xl mb-6 sm:mb-8 focus:outline-none focus:border-amber-500 tracking-[0.5em] text-amber-400" placeholder="••••">
+            <div class="flex gap-3 sm:gap-4">
+                <button onclick="switchTab('tracker', 0)" class="flex-1 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-emerald-950/50 text-amber-600 font-bold text-sm sm:text-base">Batal</button>
+                <button onclick="attemptLogin()" class="flex-1 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-amber-500 text-emerald-950 font-black text-sm sm:text-base">Masuk</button>
             </div>
         </div>
 
-        <div id="view-settings" class="hidden fade-up glass-card p-10 rounded-[3rem] space-y-8">
-            <div class="flex items-center gap-4">
-                <div class="p-3 bg-amber-500 rounded-2xl text-emerald-950"><i data-lucide="database" class="w-6 h-6"></i></div>
-                <div>
-                    <h2 class="text-xl font-black text-white">Kontrol Global</h2>
-                    <p class="text-amber-400/60 text-xs">Sinkronkan hari untuk semua pengguna</p>
+        <div id="view-settings" class="hidden fade-up glass-card p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3rem] space-y-6 sm:space-y-8">
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="p-2.5 sm:p-3 bg-amber-500 rounded-xl sm:rounded-2xl text-emerald-950 flex-shrink-0"><i data-lucide="database" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+                <div class="min-w-0">
+                    <h2 class="text-lg sm:text-xl font-black text-white truncate">Kontrol Global</h2>
+                    <p class="text-amber-400/60 text-[10px] sm:text-xs truncate">Sinkronkan hari untuk semua pengguna</p>
                 </div>
             </div>
-            <div class="bg-black/40 p-6 rounded-2xl border border-amber-500/20 space-y-6">
+            <div class="bg-black/40 p-5 sm:p-6 rounded-2xl border border-amber-500/20 space-y-5 sm:space-y-6">
                 <div class="text-center">
-                    <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest mb-2 block">Set Hari Global</span>
-                    <div class="flex items-center justify-center gap-6 mt-2">
-                        <button onclick="adminChangeActiveDay(-1)" class="w-12 h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="minus"></i></button>
-                        <span id="admin-display-day" class="text-5xl font-black text-amber-400">...</span>
-                        <button onclick="adminChangeActiveDay(1)" class="w-12 h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="plus"></i></button>
+                    <span class="text-[9px] sm:text-[10px] text-amber-400 font-bold uppercase tracking-widest mb-2 block">Set Hari Global</span>
+                    <div class="flex items-center justify-center gap-4 sm:gap-6 mt-2">
+                        <button onclick="adminChangeActiveDay(-1)" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="minus"></i></button>
+                        <span id="admin-display-day" class="text-4xl sm:text-5xl font-black text-amber-400">...</span>
+                        <button onclick="adminChangeActiveDay(1)" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 text-white flex items-center justify-center hover:bg-white/10"><i data-lucide="plus"></i></button>
                     </div>
                 </div>
-                <button id="btn-save-day" onclick="saveActiveDay()" class="w-full py-4 rounded-xl bg-amber-500 text-emerald-950 font-black text-sm uppercase tracking-widest shadow-lg hover:bg-amber-400 transition-colors">Update Hari ke Server</button>
+                <button id="btn-save-day" onclick="saveActiveDay()" class="w-full py-3 sm:py-4 rounded-xl bg-amber-500 text-emerald-950 font-black text-xs sm:text-sm uppercase tracking-widest shadow-lg hover:bg-amber-400 transition-colors">Update Hari ke Server</button>
             </div>
-            <button onclick="switchTab('tracker', 0)" class="bg-emerald-900/50 hover:bg-emerald-800 text-amber-300 font-black py-4 rounded-2xl w-full transition-colors border border-amber-500/10">Kembali</button>
+            <button onclick="switchTab('tracker', 0)" class="bg-emerald-900/50 hover:bg-emerald-800 text-amber-300 font-black py-3 sm:py-4 rounded-xl sm:rounded-2xl w-full transition-colors border border-amber-500/10 text-sm sm:text-base">Kembali</button>
         </div>
     </div>
 
-    <div id="toast" class="hidden fixed top-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-full bg-amber-500 text-emerald-950 font-black shadow-lg z-[100] border-2 border-white/20 text-sm"></div>
+    <div id="toast" class="hidden fixed top-10 left-1/2 -translate-x-1/2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-amber-500 text-emerald-950 font-black shadow-lg z-[100] border-2 border-white/20 text-xs sm:text-sm whitespace-nowrap"></div>
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_o6RZryQdNIHQ3abxIyVlDVOQflD4DZUevC4XaDIT3SVHE3j16EM2HqWP03IMduVb/exec'; 
@@ -374,22 +393,23 @@
         function renderAmalanCards() {
             const container = document.getElementById('amalan-list');
             if(!container) return;
+            // Diperbarui dengan flex-shrink-0 dan min-w-0 agar box input tidak mendorong layar pada hp kecil
             container.innerHTML = amalanConfig.map((item) => `
-                <div class="p-6 glass-card rounded-[2.5rem] flex flex-col gap-6 border-amber-500/10 group">
-                    <div class="flex items-start gap-5">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="${item.icon}" class="text-amber-400 w-6 h-6"></i>
+                <div class="p-4 sm:p-6 glass-card rounded-[2rem] sm:rounded-[2.5rem] flex flex-col gap-4 sm:gap-6 border-amber-500/10 group">
+                    <div class="flex items-start gap-3 sm:gap-5">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="${item.icon}" class="text-amber-400 w-5 h-5 sm:w-6 sm:h-6"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-[10px] font-bold text-amber-400/50 uppercase tracking-widest mb-1">${item.question}</p>
-                            <h4 class="font-black text-xl text-white leading-tight">${item.title}</h4>
+                            <p class="text-[9px] sm:text-[10px] font-bold text-amber-400/50 uppercase tracking-widest mb-1 truncate">${item.question}</p>
+                            <h4 class="font-black text-base sm:text-xl text-white leading-tight truncate">${item.title}</h4>
                         </div>
-                        <div class="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[9px] font-black text-amber-500 uppercase self-start mt-1">${item.unit}</div>
+                        <div class="px-2 sm:px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[8px] sm:text-[9px] font-black text-amber-500 uppercase self-start mt-1 flex-shrink-0">${item.unit}</div>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <button onclick="adjustValue('${item.id}', -1)" class="w-14 h-14 rounded-2xl bg-black/40 flex items-center justify-center text-white active:scale-90 border border-white/5"><i data-lucide="minus"></i></button>
-                        <input type="number" id="val-${item.id}" value="0" onchange="updateDayData('${item.id}', this.value)" class="flex-1 bg-black/50 rounded-[1.5rem] py-4 text-center text-2xl font-black text-amber-400 focus:outline-none border border-amber-500/10">
-                        <button onclick="adjustValue('${item.id}', 1)" class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 active:scale-90 border border-white/5"><i data-lucide="plus"></i></button>
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <button onclick="adjustValue('${item.id}', -1)" class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl sm:rounded-2xl bg-black/40 flex items-center justify-center text-white active:scale-90 border border-white/5"><i data-lucide="minus" class="w-5 h-5 sm:w-6 sm:h-6"></i></button>
+                        <input type="number" id="val-${item.id}" value="0" onchange="updateDayData('${item.id}', this.value)" class="flex-1 min-w-0 bg-black/50 rounded-[1.2rem] sm:rounded-[1.5rem] py-3 sm:py-4 text-center text-xl sm:text-2xl font-black text-amber-400 focus:outline-none border border-amber-500/10">
+                        <button onclick="adjustValue('${item.id}', 1)" class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl sm:rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 active:scale-90 border border-white/5"><i data-lucide="plus" class="w-5 h-5 sm:w-6 sm:h-6"></i></button>
                     </div>
                 </div>
             `).join('');
@@ -489,16 +509,16 @@
                 if (fetchedDataCloud.length === 0) {
                     content.innerHTML = `<div class="py-10 text-amber-500/30 text-xs italic">Menghubungkan ke server atau data kosong...</div>`;
                 } else {
-                    content.innerHTML = `<div class="mb-4 text-[10px] text-amber-200/50 font-bold uppercase tracking-[0.2em]">Agregat Hari ${startDay}-${endDay}</div>` + 
+                    content.innerHTML = `<div class="mb-3 sm:mb-4 text-[9px] sm:text-[10px] text-amber-200/50 font-bold uppercase tracking-[0.2em]">Agregat Hari ${startDay}-${endDay}</div>` + 
                     amalanConfig.map(item => `
-                        <div class="flex items-center justify-between p-4 bg-black/20 rounded-2xl border border-amber-500/10 shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <i data-lucide="${item.icon}" class="w-4 h-4 text-amber-400"></i>
-                                <span class="text-sm font-bold text-amber-100/90">${item.title}</span>
+                        <div class="flex items-center justify-between p-3 sm:p-4 bg-black/20 rounded-xl sm:rounded-2xl border border-amber-500/10 shadow-sm">
+                            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                                <i data-lucide="${item.icon}" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+                                <span class="text-xs sm:text-sm font-bold text-amber-100/90 truncate">${item.title}</span>
                             </div>
-                            <div class="text-right">
-                                <span class="text-xl font-black text-amber-400">${totals[item.id].toLocaleString('id-ID')}</span>
-                                <span class="text-[9px] text-amber-600 uppercase ml-1">${item.unit}</span>
+                            <div class="text-right flex-shrink-0 ml-2">
+                                <span class="text-lg sm:text-xl font-black text-amber-400">${totals[item.id].toLocaleString('id-ID')}</span>
+                                <span class="text-[8px] sm:text-[9px] text-amber-600 uppercase ml-1">${item.unit}</span>
                             </div>
                         </div>`).join('');
                 }
