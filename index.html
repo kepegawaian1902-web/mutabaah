@@ -114,9 +114,6 @@
             margin-top: 4px;
             text-transform: uppercase;
         }
-        @media (min-width: 640px) {
-            .nav-item span { font-size: 10px; }
-        }
 
         .nav-active-bg {
             position: absolute;
@@ -130,7 +127,6 @@
         }
 
         .nav-item.active { color: #022c22; opacity: 1; }
-        .nav-item.active i { transform: translateY(-2px); }
 
         .islamic-divider {
             height: 2px;
@@ -138,9 +134,6 @@
             position: relative;
             margin: 1.25rem 0;
             opacity: 0.5;
-        }
-        @media (min-width: 640px) {
-            .islamic-divider { margin: 1.5rem 0; }
         }
         
         .islamic-divider::after {
@@ -153,10 +146,6 @@
             padding: 0 12px;
             color: #fbbf24;
             font-size: 14px;
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
-        }
-        @media (min-width: 640px) {
-            .islamic-divider::after { font-size: 16px; }
         }
 
         .mosque-silhouette {
@@ -179,10 +168,6 @@
             font-size: 3rem;
             line-height: 1;
             margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 8px rgba(251,191,36,0.4));
-        }
-        @media (min-width: 640px) {
-            .arabic-accent { font-size: 3.5rem; }
         }
 
         .loading-spinner {
@@ -194,14 +179,58 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Beautiful Select Styling */
+        .select-wrapper {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            padding: 1px; 
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.4), transparent, rgba(251, 191, 36, 0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        #input-nama {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            background-size: 1rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        #input-nama:focus {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
+        }
+
+        #input-nama option {
+            background-color: #022c22;
+            color: #fbbf24;
+            padding: 12px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body class="min-h-screen">
 
     <div class="stars"></div>
     <div class="ramadan-pattern"></div>
-    
-    <!-- Silhouette Masjid di latar belakang -->
     <div class="mosque-silhouette"></div>
 
     <!-- Modal Sukses -->
@@ -251,11 +280,48 @@
         <div id="view-tracker" class="fade-up space-y-6 sm:space-y-8">
             <div class="glass-card p-4 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] relative overflow-hidden">
                 <div class="space-y-4 sm:space-y-5">
-                    <div class="relative">
-                        <i data-lucide="user" class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/50"></i>
-                        <input type="text" id="input-nama" oninput="updateGlobal('nama', this.value)"
-                            class="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-3 sm:py-4 rounded-[1.5rem] sm:rounded-[1.8rem] bg-black/40 text-white border border-white/5 focus:outline-none focus:border-amber-500/50 text-base sm:text-lg font-bold placeholder:text-emerald-800 uppercase"
-                            placeholder="Nama Lengkap">
+                    
+                    <!-- Dropdown Nama Peserta (Modern Styling) -->
+                    <div class="select-wrapper group">
+                        <i data-lucide="user-circle" class="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-500/70 z-10 pointer-events-none group-focus-within:text-amber-400 transition-colors"></i>
+                        <select id="input-nama" onchange="updateGlobal('nama', this.value)"
+                            class="w-full pl-12 sm:pl-16 pr-10 sm:pr-12 py-4 sm:py-5 rounded-[1.5rem] text-amber-100 border border-white/10 focus:outline-none text-sm sm:text-base font-semibold transition-all shadow-xl cursor-pointer">
+                            <option value="" disabled selected>Pilih Nama Pegawai</option>
+                            <option value="MAYA ANDRIANI">Maya Andriani</option>
+                            <option value="SERAMAN">Seraman</option>
+                            <option value="BAIQ KURNIAWATI">Baiq Kurniawati</option>
+                            <option value="NAYUSA">Nayusa</option>
+                            <option value="KUNTHI ARSIH">Kunthi Arsih</option>
+                            <option value="YERDI">Yerdi</option>
+                            <option value="SUSANTI">Susanti</option>
+                            <option value="YASRIZAL">Yasrizal</option>
+                            <option value="MUHAMMAD SYAFIUDIN">Muhammad Syafiudin</option>
+                            <option value="AGUS PRIANTO">Agus Prianto</option>
+                            <option value="MARTA PUSPITA SARI">Marta Puspitasari</option>
+                            <option value="ROJANI">Rojani</option>
+                            <option value="ISMU WIDATI">Ismu Widati</option>
+                            <option value="NURLAILA FITRIYAH">Nurlaila Fitriyah</option>
+                            <option value="TEJO LAKSONO">Tejo Laksono</option>
+                            <option value="IRMA SETIYANI RAHAYU">Irma Setiyani Rahayu</option>
+                            <option value="GHAIDA NASRIA AZZAHRA">Ghaida Nasria Azzahra</option>
+                            <option value="RADINA YASINTA KAROLINA">Radina Yasinta Karolina</option>
+                            <option value="META SEPTIANINGRUM">Meta Septianingrum</option>
+                            <option value="SAYYIDAH MAULANI KHOIRUNNISA">Sayyidah Maulani Khoirunnisa</option>
+                            <option value="RANANTA KARINA">Rananta Karina</option>
+                            <option value="QONITA IMAN">Qonita Iman</option>
+                            <option value="RIO PRANANDA ADITYA">Rio Prananda Aditya</option>
+                            <option value="ANIS ATHIRAH">Anis Athirah</option>
+                            <option value="ALFI NURRAHMAH">Alfi Nurrahmah</option>
+                            <option value="NADIYAH HANIFAH">Nadiyah Hanifah</option>
+                            <option value="NADITA RISKI AULIA">Nadita Riski Aulia</option>
+                            <option value="NURZIKRI SAPUTRA">Nurzikri Saputra</option>
+                            <option value="ANDRI INDRA RUKMANA">Andri Indra Rukmana</option>
+                            <option value="DEWI PUTRI ROMADONA">Dewi Putri Romadona</option>
+                            <option value="CHANDRA NELA">Chandra Nela</option>
+                            <option value="RACHEL ABIYOSO">Rachel Abiyoso</option>
+                            <option value="RICO ENFI">Rico Enfi</option>
+                            <option value="RIZKY TARMUZI">Rizky Tarmuzi</option>
+                        </select>
                     </div>
 
                     <div class="flex items-center justify-between bg-black/30 p-2 sm:p-2.5 rounded-[1.5rem] sm:rounded-[2rem] border border-amber-500/20 shadow-inner">
@@ -309,7 +375,7 @@
             </div>
         </div>
 
-        <!-- VIEW: LOGIN & SETTINGS -->
+        <!-- VIEW: LOGIN -->
         <div id="view-login" class="hidden fade-up glass-card p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3rem] text-center">
             <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6"><i data-lucide="lock" class="w-8 h-8 sm:w-10 sm:h-10 text-amber-500"></i></div>
             <h2 class="text-xl sm:text-2xl font-black mb-6 sm:mb-8 text-white">Akses Khusus</h2>
@@ -320,12 +386,13 @@
             </div>
         </div>
 
+        <!-- VIEW: SETTINGS -->
         <div id="view-settings" class="hidden fade-up glass-card p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3rem] space-y-6 sm:space-y-8">
             <div class="flex items-center gap-3 sm:gap-4">
                 <div class="p-2.5 sm:p-3 bg-amber-500 rounded-xl sm:rounded-2xl text-emerald-950 flex-shrink-0"><i data-lucide="database" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
                 <div class="min-w-0">
                     <h2 class="text-lg sm:text-xl font-black text-white truncate">Kontrol Global</h2>
-                    <p class="text-amber-400/60 text-[10px] sm:text-xs truncate">Sinkronkan hari untuk semua pengguna</p>
+                    <p class="text-amber-400/60 text-[10px] sm:text-xs truncate">Sinkronkan hari & Database</p>
                 </div>
             </div>
             <div class="bg-black/40 p-5 sm:p-6 rounded-2xl border border-amber-500/20 space-y-5 sm:space-y-6">
@@ -338,6 +405,13 @@
                     </div>
                 </div>
                 <button id="btn-save-day" onclick="saveActiveDay()" class="w-full py-3 sm:py-4 rounded-xl bg-amber-500 text-emerald-950 font-black text-xs sm:text-sm uppercase tracking-widest shadow-lg hover:bg-amber-400 transition-colors">Update Hari ke Server</button>
+                
+                <div class="pt-4 border-t border-white/10">
+                     <button onclick="openSpreadsheet()" class="flex items-center justify-center gap-2 w-full py-3 sm:py-4 rounded-xl bg-emerald-900/40 text-emerald-100 font-bold text-xs sm:text-sm uppercase tracking-widest border border-emerald-500/30 hover:bg-emerald-800/60 transition-colors group">
+                        <i data-lucide="table-2" class="w-4 h-4 text-emerald-400 group-hover:text-emerald-300"></i>
+                        Buka Database
+                    </button>
+                </div>
             </div>
             <button onclick="switchTab('tracker', 0)" class="bg-emerald-900/50 hover:bg-emerald-800 text-amber-300 font-black py-3 sm:py-4 rounded-xl sm:rounded-2xl w-full transition-colors border border-amber-500/10 text-sm sm:text-base">Kembali</button>
         </div>
@@ -346,7 +420,11 @@
     <div id="toast" class="hidden fixed top-10 left-1/2 -translate-x-1/2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-amber-500 text-emerald-950 font-black shadow-lg z-[100] border-2 border-white/20 text-xs sm:text-sm whitespace-nowrap"></div>
 
     <script>
+        // SCRIPT URL dari Google Apps Script Anda
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_o6RZryQdNIHQ3abxIyVlDVOQflD4DZUevC4XaDIT3SVHE3j16EM2HqWP03IMduVb/exec'; 
+        
+        // Link Spreadsheet Database Anda
+        const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/your-spreadsheet-id-here';
 
         const amalanConfig = [
             { id: 'shalat', title: 'Sholat Sunnah', question: 'Dhuha & Rawatib', icon: 'sparkles', unit: 'Kali' },
@@ -365,7 +443,10 @@
 
         async function init() {
             renderAmalanCards();
-            document.getElementById('input-nama').value = userProfile.nama || '';
+            if (userProfile.nama) {
+                const selectElement = document.getElementById('input-nama');
+                if (selectElement) selectElement.value = userProfile.nama;
+            }
             lucide.createIcons();
             syncCurrentDay().finally(() => {
                 fetchRecapFromCloud(false);
@@ -376,16 +457,12 @@
             try {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 5000);
-                
                 const res = await fetch(`${SCRIPT_URL}?action=getDay&t=${Date.now()}`, { signal: controller.signal });
                 clearTimeout(timeoutId);
-                
                 const data = await res.json();
-                if (data && data.day) {
-                    currentDay = parseInt(data.day);
-                }
+                if (data && data.day) currentDay = parseInt(data.day);
             } catch (err) {
-                console.warn("Gagal sinkronisasi hari, menggunakan fallback lokal.");
+                console.warn("Gagal sinkronisasi hari.");
             }
             renderDay();
         }
@@ -393,7 +470,6 @@
         function renderAmalanCards() {
             const container = document.getElementById('amalan-list');
             if(!container) return;
-            // Diperbarui dengan flex-shrink-0 dan min-w-0 agar box input tidak mendorong layar pada hp kecil
             container.innerHTML = amalanConfig.map((item) => `
                 <div class="p-4 sm:p-6 glass-card rounded-[2rem] sm:rounded-[2.5rem] flex flex-col gap-4 sm:gap-6 border-amber-500/10 group">
                     <div class="flex items-start gap-3 sm:gap-5">
@@ -419,15 +495,12 @@
         function renderDay() {
             const display = document.getElementById('display-day');
             if (display) display.textContent = currentDay;
-            
             const btnPrev = document.getElementById('btn-prev-day');
             const btnNext = document.getElementById('btn-next-day');
-            
             if (isAdmin) {
                 if (btnPrev) btnPrev.classList.remove('hidden');
                 if (btnNext) btnNext.classList.remove('hidden');
             }
-
             const data = userData[currentDay] || {};
             amalanConfig.forEach(item => {
                 const input = document.getElementById(`val-${item.id}`);
@@ -437,26 +510,17 @@
 
         async function fetchRecapFromCloud(showLoader = true) {
             const loader = document.getElementById('recap-loader');
-            const loaderText = document.getElementById('recap-loader-text');
             const wrapper = document.getElementById('recap-content-wrapper');
-
             if (showLoader) {
                 loader?.classList.remove('hidden');
                 wrapper?.classList.add('hidden');
             }
-
             try {
                 const response = await fetch(`${SCRIPT_URL}?action=getAllData&t=${Date.now()}`);
-                if (!response.ok) throw new Error("Server response not OK");
-                
                 const data = await response.json();
-                if (data && data.records) {
-                    fetchedDataCloud = data.records;
-                }
+                if (data && data.records) fetchedDataCloud = data.records;
             } catch (err) {
-                console.error("Gagal menarik data rekap:", err);
-                if (loaderText) loaderText.textContent = "Koneksi Bermasalah. Mencoba lagi...";
-                setTimeout(() => fetchRecapFromCloud(false), 3000);
+                console.error("Gagal menarik data rekap.");
             } finally {
                 showRecapPart(activeRecapPart);
                 if (showLoader) {
@@ -486,8 +550,7 @@
             });
 
             const totals = { shalat: 0, tilawah: 0, dzikir: 0, ceramah: 0, sedekah: 0 };
-
-            if (fetchedDataCloud && fetchedDataCloud.length > 0) {
+            if (fetchedDataCloud.length > 0) {
                 fetchedDataCloud.forEach(record => {
                     const dayStr = String(record.hari || "");
                     const dayMatch = dayStr.match(/\d+/);
@@ -506,22 +569,18 @@
 
             const content = document.getElementById('recap-content');
             if (content) {
-                if (fetchedDataCloud.length === 0) {
-                    content.innerHTML = `<div class="py-10 text-amber-500/30 text-xs italic">Menghubungkan ke server atau data kosong...</div>`;
-                } else {
-                    content.innerHTML = `<div class="mb-3 sm:mb-4 text-[9px] sm:text-[10px] text-amber-200/50 font-bold uppercase tracking-[0.2em]">Agregat Hari ${startDay}-${endDay}</div>` + 
-                    amalanConfig.map(item => `
-                        <div class="flex items-center justify-between p-3 sm:p-4 bg-black/20 rounded-xl sm:rounded-2xl border border-amber-500/10 shadow-sm">
-                            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-                                <i data-lucide="${item.icon}" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
-                                <span class="text-xs sm:text-sm font-bold text-amber-100/90 truncate">${item.title}</span>
-                            </div>
-                            <div class="text-right flex-shrink-0 ml-2">
-                                <span class="text-lg sm:text-xl font-black text-amber-400">${totals[item.id].toLocaleString('id-ID')}</span>
-                                <span class="text-[8px] sm:text-[9px] text-amber-600 uppercase ml-1">${item.unit}</span>
-                            </div>
-                        </div>`).join('');
-                }
+                content.innerHTML = `<div class="mb-3 sm:mb-4 text-[9px] sm:text-[10px] text-amber-200/50 font-bold uppercase tracking-[0.2em]">Agregat Hari ${startDay}-${endDay}</div>` + 
+                amalanConfig.map(item => `
+                    <div class="flex items-center justify-between p-3 sm:p-4 bg-black/20 rounded-xl sm:rounded-2xl border border-amber-500/10 shadow-sm">
+                        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                            <i data-lucide="${item.icon}" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+                            <span class="text-xs sm:text-sm font-bold text-amber-100/90 truncate">${item.title}</span>
+                        </div>
+                        <div class="text-right flex-shrink-0 ml-2">
+                            <span class="text-lg sm:text-xl font-black text-amber-400">${totals[item.id].toLocaleString('id-ID')}</span>
+                            <span class="text-[8px] sm:text-[9px] text-amber-600 uppercase ml-1">${item.unit}</span>
+                        </div>
+                    </div>`).join('');
                 lucide.createIcons();
             }
         }
@@ -537,10 +596,8 @@
 
         async function saveActiveDay() {
             const btn = document.getElementById('btn-save-day');
-            const originalText = btn.textContent;
             btn.textContent = "SINKRONISASI...";
             btn.classList.add('opacity-50', 'pointer-events-none');
-
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -551,40 +608,34 @@
                 setTimeout(() => window.location.reload(), 1000);
             } catch (err) {
                 showToast("Update terkirim (Offline mode).");
-            } finally {
-                btn.textContent = originalText;
-                btn.classList.remove('opacity-50', 'pointer-events-none');
+            }
+        }
+
+        function openSpreadsheet() {
+            if (SPREADSHEET_URL.includes('your-spreadsheet-id')) {
+                showToast("⚠️ Link Database belum disetting!");
+            } else {
+                window.open(SPREADSHEET_URL, '_blank');
             }
         }
 
         function switchTab(tab, index) {
             document.querySelectorAll('[id^="view-"]').forEach(v => v.classList.add('hidden'));
-            const target = document.getElementById(`view-${tab}`);
-            if (target) target.classList.remove('hidden');
-
+            document.getElementById(`view-${tab}`)?.classList.remove('hidden');
             const indicator = document.getElementById('nav-indicator');
             const navItems = document.querySelectorAll('.nav-item');
-            const step = 100 / navItems.length;
-            
-            if (indicator) indicator.style.left = `calc(${index * step}% + 6px)`;
-            
+            if (indicator) indicator.style.left = `calc(${index * (100/navItems.length)}% + 6px)`;
             navItems.forEach((item, idx) => {
                 idx === index ? item.classList.add('active') : item.classList.remove('active');
             });
-
-            if (tab === 'recap') {
-                fetchRecapFromCloud(true);
-            }
+            if (tab === 'recap') fetchRecapFromCloud(true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function changeDay(delta) {
             if (!isAdmin) return;
             const next = currentDay + delta;
-            if (next >= 1 && next <= 30) { 
-                currentDay = next; 
-                renderDay();
-            }
+            if (next >= 1 && next <= 30) { currentDay = next; renderDay(); }
         }
 
         function adjustValue(id, delta) {
@@ -611,26 +662,19 @@
         }
 
         function attemptLogin() {
-            if (document.getElementById('input-password').value === 'hikmah 1902') {
-                isAdmin = true; 
-                renderDay();
-                switchTab('settings', 2);
-            } else { 
-                showToast("Sandi Salah!"); 
-            }
+            if (document.getElementById('input-password').value === 'rahasia1902') {
+                isAdmin = true; renderDay(); switchTab('settings', 2);
+            } else { showToast("Sandi Salah!"); }
         }
 
         async function submitToGoogleSheet() {
             const nama = (userProfile.nama || "").trim();
-            if (!nama) { showToast("⚠️ Tulis nama Anda dulu!"); return; }
-            
-            const text = document.getElementById('text-save');
+            if (!nama) { showToast("⚠️ Pilih nama Anda dulu!"); return; }
             const btn = document.getElementById('btn-save');
+            const text = document.getElementById('text-save');
             const originalText = text.textContent;
-            
             text.textContent = 'Menyimpan...';
             btn.classList.add('opacity-70', 'pointer-events-none');
-
             const dayData = userData[currentDay] || {};
             const payload = {
                 action: 'submit',
@@ -642,17 +686,11 @@
                 ceramah_sirah: dayData.ceramah || 0, 
                 sedekah: dayData.sedekah || 0
             };
-
             try {
-                await fetch(SCRIPT_URL, { 
-                    method: 'POST', 
-                    mode: 'no-cors',
-                    body: JSON.stringify(payload) 
-                });
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
                 showSuccessModal();
-            } catch (err) { 
-                showSuccessModal(); 
-            } finally {
+            } catch (err) { showSuccessModal(); } 
+            finally {
                 text.textContent = originalText;
                 btn.classList.remove('opacity-70', 'pointer-events-none');
             }
@@ -661,9 +699,7 @@
         function showSuccessModal() {
             const modal = document.getElementById('success-modal');
             const container = document.getElementById('modal-container');
-            
             let phaseTitle = "", phaseMessage = "", phaseArabic = "الحمد لله";
-            
             if (currentDay <= 10) {
                 phaseTitle = "10 Hari Pertama - Rahmat"; 
                 phaseArabic = "بِسْمِ اللَّهِ";
@@ -671,37 +707,30 @@
             } else if (currentDay <= 20) {
                 phaseTitle = "10 Hari Kedua - Maghfirah"; 
                 phaseArabic = "أَسْتَغْفِرُ اللَّهَ";
-                phaseMessage = "Memasuki 10 hari kedua Ramadhan yang penuh maghfirah, mari kita evaluasi kinerja dengan jujur, memperbaiki setiap kekurangan, and memperbanyak ibadah agar ampunan dan keberkahan senantiasa menyertai kita.";
+                phaseMessage = "Memasuki 10 hari kedua Ramadhan yang penuh maghfirah, mari kita evaluasi kinerja dengan jujur, memperbaiki setiap kekurangan, dan memperbanyak ibadah agar ampunan dan keberkahan senantiasa menyertai kita.";
             } else {
                 phaseTitle = "10 Hari Terakhir - Hidayah"; 
                 phaseArabic = "يا رب";
                 phaseMessage = "Di 10 hari terakhir Ramadhan, momentum untuk memperkuat fokus kinerja dan mendekatkan diri kepada Allah semakin besar—jadikan setiap tugas sebagai kesempatan meningkatkan kualitas ibadah dan meraih hidayah-Nya.";
             }
-
             document.getElementById('modal-title').textContent = phaseTitle; 
             document.getElementById('modal-message').textContent = phaseMessage; 
             document.getElementById('modal-arabic').textContent = phaseArabic;
-            
             modal.classList.remove('hidden');
-            setTimeout(() => { 
-                container.classList.remove('scale-90', 'opacity-0'); 
-                container.classList.add('scale-100', 'opacity-100'); 
-            }, 50);
+            setTimeout(() => { container.classList.remove('scale-90', 'opacity-0'); container.classList.add('scale-100', 'opacity-100'); }, 50);
         }
 
         function closeModal() {
             const modal = document.getElementById('success-modal');
             const container = document.getElementById('modal-container');
-            container.classList.add('scale-90', 'opacity-0'); 
-            container.classList.remove('scale-100', 'opacity-100');
-            setTimeout(() => { modal.classList.add('hidden'); }, 500);
+            container.classList.add('scale-90', 'opacity-0'); container.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 500);
         }
 
         function showToast(msg) {
             const t = document.getElementById('toast');
             if(!t) return;
-            t.textContent = msg; 
-            t.classList.remove('hidden');
+            t.textContent = msg; t.classList.remove('hidden');
             setTimeout(() => t.classList.add('hidden'), 3000);
         }
 
