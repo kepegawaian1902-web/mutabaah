@@ -507,28 +507,64 @@
             });
         }
 
-        async function fetchRecapFromCloud(showLoader = true) {
-            const loader = document.getElementById('recap-loader');
-            const wrapper = document.getElementById('recap-content-wrapper');
-            if (showLoader) {
-                loader?.classList.remove('hidden');
-                wrapper?.classList.add('hidden');
-            }
-            try {
-                const response = await fetch(`${SCRIPT_URL}?action=getAllData&t=${Date.now()}`);
-                const data = await response.json();
-                if (data && data.records) fetchedDataCloud = data.records;
-            } catch (err) {
-                console.error("Gagal menarik data rekap.");
-            } finally {
-                showRecapPart(activeRecapPart);
-                if (showLoader) {
-                    loader?.classList.add('hidden');
-                    wrapper?.classList.remove('hidden');
+       async function fetchRecapFromCloud(showLoader = true) {
+    const recapLoader = document.getElementById('recap-loader');
+    const contentWrapper = document.getElementById('recap-content-wrapper');
+
+    if (showLoader && recapLoader) {
+        recapLoader.classList.remove('hidden');
+        contentWrapper.classList.add('hidden');
+    }
+
+    try {
+        // Menambahkan timestamp (?t=...) agar browser tidak mengambil cache lama
+        const response = await fetch(`${SCRIPT_URL}?action=getAllData&t=${Date.now()}`);
+        const data = await response.json();
+        
+        // Menangani berbagai kemungkinan format JSON dari Apps Script
+        if (data && data.records) {
+            fetchedDataCloud = Array.isArray(data.records) ? data.records : [];
+        } else if (Array.isArray(data)) {
+            fetchedDataCloud = data;
+        }
+
+        // Tampilkan data pertama di console/debug untuk verifikasi struktur
+        console.log("Data diterima:", fetchedDataCloud[0]);
+        
+    } catch (err) { 
+        console.error("Gagal memuat rekap:", err);
+    } finally {
+        showRecapPart(activeRecapPart); // Render tampilan setelah data siap
+        if (showLoader && recapLoader) {
+            recapLoader.classList.add('hidden');
+            contentWrapper.classList.remove('hidden');
                 }
             }
         }
 
+    function extractValue(record, possibleKeys) {
+    if (!record || Array.isArray(record)) return 0;
+
+    const recordKeys = Object.keys(record);
+    for (let target of possibleKeys) {
+        // Cari key yang mirip (abaikan besar kecil huruf dan karakter aneh)
+        let foundKey = recordKeys.find(k => 
+            k.toLowerCase().replace(/[^a-z]/g, '') === target.toLowerCase().replace(/[^a-z]/g, '')
+        );
+
+        if (foundKey) {
+            let val = record[foundKey];
+            // Jika nilai mengandung teks (misal: "5 Kali"), ambil angkanya saja
+            if (typeof val === 'string') {
+                let match = val.match(/\d+/);
+                return match ? parseInt(match[0]) : 0;
+            }
+            return Number(val) || 0;
+        }
+    }
+    return 0;
+}    
+        
         function showRecapPart(part) {
             activeRecapPart = part;
             const startDay = (part - 1) * 7 + 1;
@@ -737,5 +773,6 @@
     </script>
 </body>
 </html>
+
 
 
